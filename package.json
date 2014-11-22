@@ -1,6 +1,6 @@
 {
   "name": "node-thumbnailer-web",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Use node-thumbnailer to make thumbnails of images on the web",
   "main": "index.js",
   "scripts": {
