@@ -1,0 +1,21 @@
+{
+  "name": "node-thumbnailer-web",
+  "version": "0.0.0",
+  "description": "Use node-thumbnailer to make thumbnails of images on the web",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/ --recursive --require require/enable-power-assert.js",
+    "coverage": "istanbul cover _mocha -- test/ --recursive --require require/enable-power-assert.js"
+  },
+  "author": "Richard Kazuo Miller",
+  "license": "MIT",
+  "dependencies" : {
+    "node-thumbnailer" : "0.0.1",
+    "request" : "2.48.0"
+  },
+  "devDependencies" : {
+    "sinon" : "1.11.1",
+    "power-assert" : "0.10.0",
+    "espower-loader" : "0.10.0"
+  }
+}
