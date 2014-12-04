@@ -146,14 +146,30 @@ describe('lib/thumbnailer_web',function(){
   })
   describe('uploadThumbnail',function(){
     beforeEach(function(){
+      var on = function(a,b){
+        if(a == 'error' && request.emitsError){
+          b(new Error())
+        }
+        else if(a == 'response'){
+          b(request.defaultResponse)
+        }
+        else if(a == 'end'){
+          b()
+        }
+      }
       var request = sinon.stub(this.ThumbnailerWeb,'request').returns({
-        on : sinon.stub()
+        on : on
       })
       this.ThumbnailerWeb.request = request;
       var fs = {
         createReadStream : sinon.stub().returns({
           pipe : sinon.stub()
         }),
+        stat : function(a,b){
+          b(null,{
+            size: 10
+          })
+        },
         unlink : function(){}
       }
       this.ThumbnailerWeb.fs = fs
@@ -165,17 +181,7 @@ describe('lib/thumbnailer_web',function(){
         statusCode : 200
       }
       request.put = sinon.stub().returns({
-        on : function(a,b){
-          if(a == 'error' && request.emitsError){
-            b(new Error())
-          }
-          else if(a == 'response'){
-            b(request.defaultResponse)
-          }
-          else if(a == 'end'){
-            b()
-          }
-        }
+        on : on
       })
       this.request = request
     })
@@ -194,8 +200,9 @@ describe('lib/thumbnailer_web',function(){
       var callback = sinon.stub()
       var options = 'http://foobar.com/hogehoge.jpg'
       this.thumbnailerWeb.uploadThumbnail('thumbnail.png',options,callback)
-      assert(this.request.put.callCount == 1)
-      assert(this.request.put.getCall(0).args[0] == 'http://foobar.com/hogehoge.jpg')
+      assert(this.request.callCount == 1)
+      assert(this.request.getCall(0).args[0].url == 'http://foobar.com/hogehoge.jpg')
+      assert(this.request.getCall(0).args[0].method == 'PUT')
     })
     it('should callback with an error if the status is not 200',function(){
       var callback = sinon.stub()
