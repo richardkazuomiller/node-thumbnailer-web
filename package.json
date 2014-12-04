@@ -1,6 +1,6 @@
 {
   "name": "node-thumbnailer-web",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Use node-thumbnailer to make thumbnails of images on the web",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "author": "Richard Kazuo Miller",
   "license": "MIT",
   "dependencies" : {
-    "node-thumbnailer" : "0.0.4",
+    "node-thumbnailer" : "0.0.2",
     "request" : "2.48.0"
   },
   "devDependencies" : {
