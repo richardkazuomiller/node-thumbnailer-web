@@ -13,6 +13,10 @@
     "node-thumbnailer" : "0.0.3",
     "request" : "2.48.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/richardkazuomiller/node-thumbnailer-web.git"
+  },
   "devDependencies" : {
     "sinon" : "1.11.1",
     "power-assert" : "0.10.0",
